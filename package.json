@@ -1,0 +1,23 @@
+{
+  "name": "hhj",
+  "version": "1.0.0",
+  "description": "Discord 서버 '홍합탕'에서 추출한 다양한 데이터를 쉽고 (되도록이면) 예쁘게 보여주는 사이트",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rasauq1122/HongHapJjim.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rasauq1122/HongHapJjim/issues"
+  },
+  "homepage": "https://github.com/rasauq1122/HongHapJjim#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1"
+  }
+}
