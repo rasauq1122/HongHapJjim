@@ -15,6 +15,7 @@ const client = new Client({ intents: [
     GatewayIntentBits.GuildMembers,
 
     IntentsBitField.Flags.GuildVoiceStates,
+    IntentsBitField.Flags.Guilds
 ] });
 
 const eventsPath = path.join(__dirname, 'events');
