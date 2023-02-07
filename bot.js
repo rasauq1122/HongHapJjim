@@ -17,7 +17,7 @@ const client = new Client({ intents: [
     IntentsBitField.Flags.GuildVoiceStates,
     IntentsBitField.Flags.Guilds,
     IntentsBitField.Flags.GuildMessages,
-    IntentsBitField.Flags.GuildMembers 
+    IntentsBitField.Flags.GuildMembers
 ] });
 
 const eventsPath = path.join(__dirname, 'events');
