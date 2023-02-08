@@ -7,6 +7,9 @@ const path = require('path');
 const fs = require('fs');
 const { conn } = require('./config/db');
 
+const express = require('express'); 
+const app = express();
+
 // Create a new client instance
 const client = new Client({ intents: [
     GatewayIntentBits.Guilds,
@@ -71,8 +74,24 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-
 client.login(discord_bot_token);
+
+// express part
+
+const routesPath = path.join(__dirname, 'routes');
+const routeFiles = fs.readdirSync(routesPath).filter(file => file.endsWith('.js'));
+
+app.use(express.json());
+
+for (const file of routeFiles) {
+	const filePath = path.join(routesPath, file);
+	const route = require(filePath);
+	app.use('/'+file.slice(0, -3), route);
+}
+
+app.listen(3000, () => {
+	console.log('API server on');
+});
 
 const rl = readline.createInterface({ input, output });
 rl.question("", (answer) => {

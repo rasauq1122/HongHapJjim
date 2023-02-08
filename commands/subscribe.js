@@ -18,7 +18,7 @@ module.exports = {
                 await interaction.reply('이용해주셔서 감사합니다!');
             } 
             else {
-                await interaction.reply('이미 역할이 부여되었습니다.');
+                await interaction.reply('이미 이용중입니다.');
             }
         });
 

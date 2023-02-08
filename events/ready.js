@@ -1,6 +1,5 @@
 const { Events } = require('discord.js');
 const badServiceUpdate = require('./Ready/badServiceUpdate');
-const testRoleReallyExist = require('./Ready/testRoleReallyExist');
 const findGuildWhoseServiceNeverBeMade = require('./Ready/findGuildWhoseServiceNeverBeMade');
 const insertService = require('./Ready/insertService');
 
@@ -12,8 +11,7 @@ module.exports = {
 
         queue = [
             badServiceUpdate,
-            // testRoleReallyExist,
-            // findGuildWhoseServiceNeverBeMade,
+            findGuildWhoseServiceNeverBeMade,
             insertService,
         ]
 
