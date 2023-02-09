@@ -22,7 +22,6 @@ module.exports = {
             body[ele] = nowState[ele];
         }
 
-        console.log(body);
-        axios.post(apiServer+'/voice', { data : body });
+        axios.post(apiServer+'/voice/use', { data : body });
     },
 };

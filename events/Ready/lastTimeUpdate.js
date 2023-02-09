@@ -6,15 +6,13 @@ const apiServer = 'http://localhost:'+api_server_port;
 module.exports = {
 	name: Events.ClientReady,
 	once: true,
-    description : 'insertService',
+    description : 'lastTimeUpdate',
 	execute(client) {
-        const Guilds = client.guilds.cache;
-
-        // insert service that startTime is now.
+        const Guilds = client.guilds.cache;                
         for (const [snowflake, guild] of Guilds) {
-            axios.post(apiServer+'/guild/service', { data :{
-                guildId : guild.id
-            }});
+            const body = {guildId : guild.id};
+            axios.post(apiServer+'/guild/lastTime', {data: body});
+            axios.put(apiServer+'/guild/lastTime', {data: body});
         }
 	},
 };

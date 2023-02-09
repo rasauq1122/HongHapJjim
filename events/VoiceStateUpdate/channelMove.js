@@ -18,11 +18,12 @@ module.exports = {
         console.log("move");
 
         const putBody =  {
+            guildId : oldState.guild.id,
             channelId : oldState.channelId,
             memberId : oldState.member.id,
         };
 
-        axios.put(apiServer+'/voice', { data : putBody });
+        axios.put(apiServer+'/voice/use', { data : putBody });
 
         const postBody =  {
             channelId : nowState.channelId,
@@ -34,6 +35,6 @@ module.exports = {
             postBody[ele] = nowState[ele];
         }
 
-        axios.post(apiServer+'/voice', { data : postBody });
+        axios.post(apiServer+'/voice/use', { data : postBody });
     },
 };

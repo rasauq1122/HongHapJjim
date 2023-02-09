@@ -5,6 +5,9 @@ const readline = require('readline');
 const { stdin: input, stdout: output, exit } = require('process');
 const path = require('path');
 const fs = require('fs');
+const axios = require('axios');
+const { api_server_port } = require('./config.json');
+const apiServer = 'http://localhost:'+api_server_port;
 const { conn } = require('./config/db');
 
 const express = require('express'); 
@@ -78,16 +81,7 @@ client.login(discord_bot_token);
 
 // express part
 
-const routesPath = path.join(__dirname, 'routes');
-const routeFiles = fs.readdirSync(routesPath).filter(file => file.endsWith('.js'));
-
-app.use(express.json());
-
-for (const file of routeFiles) {
-	const filePath = path.join(routesPath, file);
-	const route = require(filePath);
-	app.use('/'+file.slice(0, -3), route);
-}
+app.use('/', require('./bot-api'));
 
 app.listen(3000, () => {
 	console.log('API server on');
@@ -96,8 +90,18 @@ app.listen(3000, () => {
 const rl = readline.createInterface({ input, output });
 rl.question("", (answer) => {
     client.destroy();
-    conn.query('UPDATE service SET endTime = now() WHERE endTime is NULL', (err, rows, field) => {
-        if (err) throw err;
-    });
+	const Guilds = client.guilds.cache;                
+	for (const [guildId, guild] of Guilds) {
+		const body = {guildId : guild.id};
+		const members = guild.members.cache;
+		axios.put(apiServer+'/guild/service', {data : body})
+		for (const [memberId, member] of members) {
+			body.memberId = memberId;
+			if (member.voice.channel != null) {
+				body.channelId = member.voice.channelId;
+				axios.put(apiServer+'/voice/use', {data: body});    
+			}
+		} 
+	}
     exit();
 });

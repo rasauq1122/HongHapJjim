@@ -13,10 +13,11 @@ module.exports = {
         if (nowState.channel != null) return;
 
         const body =  {
+            guildId : oldState.guild.id,
             channelId : oldState.channelId,
             memberId : oldState.member.id,
         };
 
-        axios.put(apiServer+'/voice', { data : body });
+        axios.put(apiServer+'/voice/use', { data : body });
     },
 };
